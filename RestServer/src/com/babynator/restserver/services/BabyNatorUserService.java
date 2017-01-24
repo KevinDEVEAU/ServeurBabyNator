@@ -22,9 +22,10 @@ public class BabyNatorUserService {
     @POST
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public BabyNatorUser postUser( BabyNatorUser user ) {
-    	System.out.println(user);
-        return user; 
+    public BabyNatorUser postUser(BabyNatorUser baby) {
+    	System.out.println(baby.toString());
+    	return baby;
+       // return null; 
     }
 }
 

@@ -33,7 +33,12 @@ public class BabyNatorUser {
         this.age = age;
     }
 
-    public int getAge() {
+    @Override
+	public String toString() {
+		return "BabyNatorUser [id=" + id + ", username=" + username + ", age=" + age + "]";
+	}
+
+	public int getAge() {
         return this.age;
     }
 }
