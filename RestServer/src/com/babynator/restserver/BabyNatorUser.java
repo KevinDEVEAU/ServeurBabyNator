@@ -1,44 +1,42 @@
 package com.babynator.restserver;
 
 public class BabyNatorUser {
+	//POJO lié à la table
 	private int id;
-    private String username;
-    private int age;
-
-    public BabyNatorUser() { }
-
-    public BabyNatorUser(int id, String username, int age) {
-        this.id = id;
-        this.username = username;
-        this.age = age;
-    }
-    
-    /// GETTERS & SETTERS ///
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    public int getId() {
-        return this.id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
+    private String email;
+    private String password;
+       
+	public BabyNatorUser() {
+		super();
+	}
+	public BabyNatorUser(int id, String email, String password) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.password = password;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	@Override
 	public String toString() {
-		return "BabyNatorUser [id=" + id + ", username=" + username + ", age=" + age + "]";
+		return "BabyNatorUser [id=" + id + ", email=" + email + ", password=" + password + "]";
 	}
 
-	public int getAge() {
-        return this.age;
-    }
+
 }
