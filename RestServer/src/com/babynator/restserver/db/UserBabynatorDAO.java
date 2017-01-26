@@ -31,4 +31,20 @@ public class UserBabynatorDAO {
 		return userConnect;	
 
 	}
+	
+	public static boolean registerUser(BabyNatorUser user){
+		String requeteRegister = "INSERT INTO userbabynator (id,email,password) VALUES (ID_USER.nextval,?,?)";
+		try {
+			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
+			requeteSt.setString(1,user.getEmail());
+			requeteSt.setString(2,user.getPassword());
+			requeteSt.executeUpdate();	
+		}
+		
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }
