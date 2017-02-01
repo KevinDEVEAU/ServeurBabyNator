@@ -1,6 +1,6 @@
 package com.babynator.restserver.services;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.GET;
@@ -12,10 +12,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.babynator.restserver.BabyNatorUser;
-import com.babynator.restserver.db.UserBabynatorDAO;
+import com.babynator.restserver.Baby;
+import com.babynator.restserver.db.BabyDAO;
 
-@Path("/users")
-public class BabyNatorUserService {
+@Path("/babies")
+public class BabyService {
 	
 	@PostConstruct
 	public void init() {
@@ -24,29 +25,27 @@ public class BabyNatorUserService {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public BabyNatorUser getUser( @PathParam("id") int id ) {
-    	//BabyNatorUser user = new BabyNatorUser(id, "jdoe", 22);
-        return new BabyNatorUser();
+    public Baby getEvent( @PathParam("id") int id ) {
+    	return BabyDAO.getBabyById(id);
     }
     
-    //service pour se connecter
+    //liste des bébés
     @POST
-    @Path("/connect")
+    @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
-    public BabyNatorUser postUser(BabyNatorUser user) {
-    	System.out.println(user.toString());
-    	user = UserBabynatorDAO.seConnecter(user);
-    	System.out.println(user);
-        return user; 
+    public ArrayList<Baby> postEvent(BabyNatorUser user) {
+    	ArrayList<Baby> list = BabyDAO.getAllByUser(user);
+    	System.out.println(list);
+        return list; 
     }
     
-    //service pour se connecter
+    //ajout d'un bébé
     @POST
-    @Path("/register")
+    @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response registerUser(BabyNatorUser baby) {
+    public Response addEvent(Baby baby) {
     	System.out.println(baby.toString());
-    	boolean testRegister = UserBabynatorDAO.registerUser(baby);
+    	boolean testRegister = BabyDAO.addBaby(baby);
     	System.out.println(baby);
     	if (!testRegister)
     		return Response.status(Response.Status.CONFLICT).build();

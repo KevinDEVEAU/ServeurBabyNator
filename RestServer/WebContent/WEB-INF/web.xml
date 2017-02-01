@@ -22,6 +22,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RestServer-serlvet</servlet-name>
-        <url-pattern>/api/*</url-pattern>
+        <url-pattern>/babyNator/*</url-pattern>
     </servlet-mapping>
 </web-app>
