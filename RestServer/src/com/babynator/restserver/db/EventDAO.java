@@ -13,12 +13,12 @@ public class EventDAO {
 	public EventDAO(){};
 	
 	//fonction pour vérifier si le user existe
-	public static ArrayList<Event> getAllByUser(BabyNatorUser user) {
+	public static ArrayList<Event> getAllByUser(int id_user) {
 		String requeteConnexion = "select * from event where idUser = ?";		
 		ArrayList<Event> events = new ArrayList<Event>();
 		try {
 			PreparedStatement requete = DAOOracle.getInstance().getConnection().prepareStatement(requeteConnexion);
-			requete.setInt(1,user.getId());
+			requete.setInt(1,id_user);
 			ResultSet resultat = requete.executeQuery();
 
 			if (resultat.next()) {
@@ -34,17 +34,14 @@ public class EventDAO {
 	
 	public static boolean addEvent(Event event){
 		String requeteRegister = "INSERT INTO event (id,currentDate,title,description,idUser) "
-				+ "VALUES (?,to_date(?, 'yyyy/mm/dd hh:mi'),?,?,?)";
+				+ "VALUES (ID_USER.nextval,to_date(?, 'yyyy/mm/dd hh:mi'),?,?,?)";
 		try {
 			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
-			requeteSt.setInt(1,event.getId());
 			
-			System.out.println("OKKKKKKK "+event.getCurrent_date());
-			
-			requeteSt.setString(2,event.getCurrent_date());
-			requeteSt.setString(3,event.getTitle());
-			requeteSt.setString(4,event.getTitle());
-			requeteSt.setInt(5,event.getId_user());
+			requeteSt.setString(1,event.getCurrent_date());
+			requeteSt.setString(2,event.getTitle());
+			requeteSt.setString(3,event.getDescription());
+			requeteSt.setInt(4,event.getId_user());
 			requeteSt.executeUpdate();	
 		}		
 		catch (SQLException e) {

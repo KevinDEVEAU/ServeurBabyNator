@@ -33,8 +33,8 @@ public class EventService {
     @POST
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Event> postEvent(BabyNatorUser user) {
-    	ArrayList<Event> list = EventDAO.getAllByUser(user);
+    public ArrayList<Event> postEvent(int id_user) {
+    	ArrayList<Event> list = EventDAO.getAllByUser(id_user);
     	System.out.println(list);
         return list; 
     }
