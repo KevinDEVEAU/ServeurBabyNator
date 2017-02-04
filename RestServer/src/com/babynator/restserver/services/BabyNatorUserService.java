@@ -26,18 +26,18 @@ public class BabyNatorUserService {
     @Produces(MediaType.APPLICATION_JSON)
     public BabyNatorUser getUser( @PathParam("id") int id ) {
     	//BabyNatorUser user = new BabyNatorUser(id, "jdoe", 22);
-        return new BabyNatorUser();
+        return null;
     }
     
     //service pour se connecter
     @POST
     @Path("/connect")
     @Produces(MediaType.APPLICATION_JSON)
-    public BabyNatorUser postUser(BabyNatorUser user) {
-    	System.out.println(user.toString());
-    	user = UserBabynatorDAO.seConnecter(user);
-    	System.out.println(user);
-        return user; 
+    public BabyNatorUser postUser(BabyNatorUser baby) {
+    	System.out.println(baby.toString());
+    	baby = UserBabynatorDAO.seConnecter(baby);
+    	System.out.println(baby);
+        return baby; 
     }
     
     //service pour se connecter

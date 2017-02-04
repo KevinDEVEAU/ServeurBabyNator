@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.babynator.restserver.BabyNatorUser;
+import com.babynator.restserver.Data;
 import com.babynator.restserver.Baby;
 import com.babynator.restserver.db.BabyDAO;
 
@@ -26,6 +27,7 @@ public class BabyService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Baby getEvent( @PathParam("id") int id ) {
+    	System.out.println(BabyDAO.getBabyById(id).toString());
     	return BabyDAO.getBabyById(id);
     }
     
@@ -50,7 +52,7 @@ public class BabyService {
     	if (!testRegister)
     		return Response.status(Response.Status.CONFLICT).build();
     	else 
-    		return Response.ok(baby, MediaType.APPLICATION_JSON).build();
+    		return Response.ok(BabyDAO.getLastInsertBaby(baby.getId_user()), MediaType.APPLICATION_JSON).build();
     }
 }
 

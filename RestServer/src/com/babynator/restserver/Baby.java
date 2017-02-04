@@ -4,8 +4,9 @@ import java.sql.Date;
 
 public class Baby {
 	//POJO lié à la table
-	private int id, id_user;
-	private Date birthday;
+	private int id;
+	private int id_user;
+	private String birthday;
     private String name;
     private String gender;
     
@@ -13,48 +14,72 @@ public class Baby {
 	public Baby() {
 		super();
 	}
-	public Baby(int id, Date birthday, String name, String gender, int id_user) {
-		super();
-		this.id = id;
-		this.birthday = birthday;
-		this.name = name;
-		this.gender = gender;
-		this.id_user = id_user;
-	}
-	
-	@Override
-	public String toString() {
-		return "Baby [id=" + id + ", birthday=" + birthday.toString() + ", name=" + name + 
-				", gender "+ gender +", id_user= "+id_user+"]";
-	}
+
+
 	public int getId() {
 		return id;
 	}
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getId_User() {
+
+
+	public int getId_user() {
 		return id_user;
 	}
-	public void setId_User(int id_user) {
-		this.id = id_user;
+
+
+	public void setId_user(int id_user) {
+		this.id_user = id_user;
 	}
+
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+
 	public String getName() {
 		return name;
 	}
+
+
 	public void setName(String name) {
-		this.name =  name;
+		this.name = name;
 	}
+
+
 	public String getGender() {
 		return gender;
 	}
+
+
 	public void setGender(String gender) {
-		this.gender =  gender;
+		this.gender = gender;
 	}
-	public Date getBirthday() {
-		return birthday;
+
+
+	@Override
+	public String toString() {
+		return "Baby [id=" + id + ", id_user=" + id_user + ", birthday=" + birthday + ", name=" + name + ", gender="
+				+ gender + "]";
 	}
-	public void setBirthday(Date birthday) {
-		this.birthday =  birthday;
+
+
+	public Baby(int id, int id_user, String birthday, String name, String gender) {
+		super();
+		this.id = id;
+		this.id_user = id_user;
+		this.birthday = birthday;
+		this.name = name;
+		this.gender = gender;
 	}
+
 }
