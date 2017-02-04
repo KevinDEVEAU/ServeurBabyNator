@@ -22,6 +22,7 @@ public class EventService {
 	public void init() {
 	  // init instance
 	}
+	
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,12 +46,32 @@ public class EventService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addEvent(Event event) {
     	System.out.println(event.toString());
-    	boolean testRegister = EventDAO.addEvent(event);
+    	boolean test = EventDAO.addEvent(event);
     	System.out.println(event);
-    	if (!testRegister)
+    	if (!test)
     		return Response.status(Response.Status.CONFLICT).build();
     	else 
     		return Response.ok(event, MediaType.APPLICATION_JSON).build();
     }
+  
+    //maj d'un event
+    @POST
+    @Path("/set")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response setEvent(Event event) {
+    	boolean test = EventDAO.addEvent(event);
+    	if (!test)
+    		return Response.status(Response.Status.CONFLICT).build();
+    	else 
+    		return Response.ok(event, MediaType.APPLICATION_JSON).build();
+    }
+    
+    //get un event
+    @POST
+    @Path("/get")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Event setEvent(int id) {
+    	return EventDAO.getEventById(id);
+    }    
 }
 

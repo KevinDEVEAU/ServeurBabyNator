@@ -21,7 +21,7 @@ public class EventDAO {
 			requete.setInt(1,id_user);
 			ResultSet resultat = requete.executeQuery();
 
-			if (resultat.next()) {
+			while (resultat.next()) {
 				events.add(new Event 
 						(resultat.getInt("id"), resultat.getString("currentDate"),resultat.getString("title"), resultat.getString("description"), resultat.getInt("idUser")));
 			}			
@@ -34,7 +34,7 @@ public class EventDAO {
 	
 	public static boolean addEvent(Event event){
 		String requeteRegister = "INSERT INTO event (id,currentDate,title,description,idUser) "
-				+ "VALUES (ID_USER.nextval,to_date(?, 'yyyy/mm/dd hh:mi'),?,?,?)";
+				+ "VALUES (ID_USER.nextval,to_date(?, 'yyyy/mm/dd hh24:mi'),?,?,?)";
 		try {
 			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
 			
@@ -42,6 +42,24 @@ public class EventDAO {
 			requeteSt.setString(2,event.getTitle());
 			requeteSt.setString(3,event.getDescription());
 			requeteSt.setInt(4,event.getId_user());
+			requeteSt.executeUpdate();	
+		}		
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean setEvent(Event event){
+		String requeteRegister = "UPDATE event SET currentDate = ? and title = ? and description = ? WHERE id = ?";
+		try {
+			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
+			
+			requeteSt.setString(1,event.getCurrent_date());
+			requeteSt.setString(2,event.getTitle());
+			requeteSt.setString(3,event.getDescription());
+			requeteSt.setInt(4,event.getId());
 			requeteSt.executeUpdate();	
 		}		
 		catch (SQLException e) {
