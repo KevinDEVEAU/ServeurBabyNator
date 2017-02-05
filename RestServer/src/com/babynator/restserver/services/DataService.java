@@ -37,7 +37,7 @@ public class DataService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addData(Data data) {
     	System.out.println(data.toString());
-    	boolean testAddData = DataDAO.addData(data);
+    	boolean testAddData = DataDAO.addDataBirthday(data);
     	if (!testAddData)
     		return Response.status(Response.Status.CONFLICT).build();
     	else 

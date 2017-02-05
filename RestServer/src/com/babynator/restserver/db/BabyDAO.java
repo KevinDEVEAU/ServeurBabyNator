@@ -15,22 +15,24 @@ public class BabyDAO {
 	public BabyDAO(){};
 	
 	//fonction pour vérifier si le user existe
-	public static ArrayList<Baby> getAllByUser(BabyNatorUser user) {
-		String requeteConnexion = "select * from baby where idUser = ?";		
+	public static ArrayList<Baby> getAllByUser(int user) {
+		String requeteConnexion = "select id, name, gender, birthday, iduser, length, weight  from baby left outer join data on baby.id = data.idbaby where idUser = ? and data.currentdate = (select max(d.currentdate) from data d where d.idbaby = baby.id) ";		
 		ArrayList<Baby> babies = new ArrayList<Baby>();
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		try {
 			PreparedStatement requete = DAOOracle.getInstance().getConnection().prepareStatement(requeteConnexion);
-			requete.setInt(1,user.getId());
+			requete.setInt(1,user);
 			ResultSet resultat = requete.executeQuery();
 
-			if (resultat.next()) {
-			//	babies.add(new Baby 
-			//			(resultat.getInt("id"),resultat.getString("birthday"), resultat.getString("name"), resultat.getString("gender"), resultat.getInt("idUser")));
+			while (resultat.next()) {
+				babies.add(new Baby 
+						(resultat.getInt("id"), resultat.getInt("idUser"),df.format(resultat.getDate("birthday")), resultat.getString("name"), resultat.getString("gender"), resultat.getInt("weight"),resultat.getInt("length")));
 			}			
 		}		
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println(babies.toString() +"list");
 		return babies;	
 	}
 	

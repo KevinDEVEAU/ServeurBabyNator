@@ -35,7 +35,7 @@ public class BabyService {
     @POST
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Baby> postEvent(BabyNatorUser user) {
+    public ArrayList<Baby> postEvent(int user) {
     	ArrayList<Baby> list = BabyDAO.getAllByUser(user);
     	System.out.println(list);
         return list; 

@@ -2,6 +2,8 @@ package com.babynator.restserver;
 
 import java.sql.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class Baby {
 	//POJO lié à la table
 	private int id;
@@ -9,8 +11,33 @@ public class Baby {
 	private String birthday;
     private String name;
     private String gender;
+    @JsonIgnore
+    private int weight;
+    @JsonIgnore
+    private int length;
+    
     
        
+	public int getWeight() {
+		return weight;
+	}
+
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+
+
+	public int getLength() {
+		return length;
+	}
+
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+
 	public Baby() {
 		super();
 	}
@@ -64,12 +91,26 @@ public class Baby {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	
+
+
+
+	public Baby(int id, int id_user, String birthday, String name, String gender, int weight, int length) {
+		super();
+		this.id = id;
+		this.id_user = id_user;
+		this.birthday = birthday;
+		this.name = name;
+		this.gender = gender;
+		this.weight = weight;
+		this.length = length;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Baby [id=" + id + ", id_user=" + id_user + ", birthday=" + birthday + ", name=" + name + ", gender="
-				+ gender + "]";
+				+ gender + ", weight=" + weight + ", length=" + length + "]";
 	}
 
 
@@ -80,6 +121,8 @@ public class Baby {
 		this.birthday = birthday;
 		this.name = name;
 		this.gender = gender;
+		this.weight=0;
+		this.length = 0;
 	}
 
 }
