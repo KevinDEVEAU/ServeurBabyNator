@@ -59,7 +59,7 @@ public class EventService {
     @Path("/set")
     @Produces(MediaType.APPLICATION_JSON)
     public Response setEvent(Event event) {
-    	boolean test = EventDAO.addEvent(event);
+    	boolean test = EventDAO.setEvent(event);
     	if (!test)
     		return Response.status(Response.Status.CONFLICT).build();
     	else 
@@ -70,7 +70,7 @@ public class EventService {
     @POST
     @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
-    public Event setEvent(int id) {
+    public Event getEventById(int id) {
     	return EventDAO.getEventById(id);
     }    
 }
