@@ -73,5 +73,17 @@ public class EventService {
     public Event getEventById(int id) {
     	return EventDAO.getEventById(id);
     }    
+  
+    //remove un event
+    @POST
+    @Path("/remove")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response removeEvent(int id) {
+    	boolean test = EventDAO.removeEvent(id);
+    	if (!test)
+    		return Response.status(Response.Status.CONFLICT).build();
+    	else 
+    		return Response.ok(test, MediaType.APPLICATION_JSON).build();
+    }
 }
 

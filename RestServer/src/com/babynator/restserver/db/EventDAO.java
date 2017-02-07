@@ -32,6 +32,21 @@ public class EventDAO {
 		return events;	
 	}
 	
+	public static boolean removeEvent(int id){
+		String requeteRegister = "DELETE FROM event WHERE id = ? ";
+		try {
+			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
+			
+			requeteSt.setInt(1, id);
+			requeteSt.executeUpdate();	
+		}		
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 	public static boolean addEvent(Event event){
 		String requeteRegister = "INSERT INTO event (id,currentDate,title,description,idUser) "
 				+ "VALUES (ID_USER.nextval,to_date(?, 'yyyy/mm/dd hh24:mi'),?,?,?)";
