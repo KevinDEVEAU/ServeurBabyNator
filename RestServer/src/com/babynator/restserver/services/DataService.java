@@ -58,8 +58,7 @@ public class DataService {
     		return Response.status(Response.Status.CONFLICT).build();
     	else 
     		return Response.status(Response.Status.ACCEPTED).build();
-    }
-    
+    }   
     
     @POST
     @Path("/list")
@@ -69,5 +68,16 @@ public class DataService {
     	List<Data> list = DataDAO.getListData(id_baby);
     	System.out.println(list);
         return list; 
+    }
+    
+    @POST
+    @Path("/remove")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response removeDatas(int id) {
+    	boolean test = DataDAO.removeDatas(id);
+    	if (!test)
+    		return Response.status(Response.Status.CONFLICT).build();
+    	else 
+    		return Response.ok(test, MediaType.APPLICATION_JSON).build();
     }
 }

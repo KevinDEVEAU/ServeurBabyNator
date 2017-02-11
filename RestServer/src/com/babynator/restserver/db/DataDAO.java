@@ -77,4 +77,18 @@ public class DataDAO {
 		return datas;
 	}
 	
+	public static boolean removeDatas(int id){
+		String requeteRemove = "DELETE FROM data WHERE idbaby = ? ";
+		try {
+			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRemove);
+			
+			requeteSt.setInt(1, id);
+			requeteSt.executeUpdate();	
+		}		
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}		
 }

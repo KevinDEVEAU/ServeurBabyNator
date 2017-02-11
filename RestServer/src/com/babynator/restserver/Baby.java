@@ -11,11 +11,11 @@ public class Baby {
 	private String birthday;
     private String name;
     private String gender;
+    private String picture;
     @JsonIgnore
     private int weight;
     @JsonIgnore
-    private int length;
-    
+    private int length;   
     
        
 	public int getWeight() {
@@ -91,11 +91,8 @@ public class Baby {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
 
-
-
-	public Baby(int id, int id_user, String birthday, String name, String gender, int weight, int length) {
+	public Baby(int id, int id_user, String birthday, String name, String gender, int weight, int length, String picture) {
 		super();
 		this.id = id;
 		this.id_user = id_user;
@@ -104,25 +101,37 @@ public class Baby {
 		this.gender = gender;
 		this.weight = weight;
 		this.length = length;
+		this.picture = picture;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Baby [id=" + id + ", id_user=" + id_user + ", birthday=" + birthday + ", name=" + name + ", gender="
-				+ gender + ", weight=" + weight + ", length=" + length + "]";
+				+ gender + ", weight=" + weight + ", length=" + length + ", picture= "+ picture+" ]";
 	}
 
 
-	public Baby(int id, int id_user, String birthday, String name, String gender) {
+	public Baby(int id, int id_user, String birthday, String name, String gender, String picture) {
 		super();
 		this.id = id;
 		this.id_user = id_user;
 		this.birthday = birthday;
 		this.name = name;
 		this.gender = gender;
+		this.picture = picture;
 		this.weight=0;
 		this.length = 0;
+	}
+
+
+	public String getPicture() {
+		return this.picture;
+	}
+
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 }

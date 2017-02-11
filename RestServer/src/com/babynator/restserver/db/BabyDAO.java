@@ -16,7 +16,7 @@ public class BabyDAO {
 	
 	//fonction pour vérifier si le user existe
 	public static ArrayList<Baby> getAllByUser(int user) {
-		String requeteConnexion = "select id, name, gender, birthday, iduser, length, weight  from baby left outer join data on baby.id = data.idbaby where idUser = ? and data.currentdate = (select max(d.currentdate) from data d where d.idbaby = baby.id) ";		
+		String requeteConnexion = "select id, name, gender, birthday, iduser, length, weight, picture from baby left outer join data on baby.id = data.idbaby where idUser = ? and data.currentdate = (select max(d.currentdate) from data d where d.idbaby = baby.id) ";		
 		ArrayList<Baby> babies = new ArrayList<Baby>();
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		try {
@@ -26,7 +26,9 @@ public class BabyDAO {
 
 			while (resultat.next()) {
 				babies.add(new Baby 
-						(resultat.getInt("id"), resultat.getInt("idUser"),df.format(resultat.getDate("birthday")), resultat.getString("name"), resultat.getString("gender"), resultat.getInt("weight"),resultat.getInt("length")));
+						(resultat.getInt("id"), resultat.getInt("idUser"),df.format(resultat.getDate("birthday")), 
+								resultat.getString("name"), resultat.getString("gender"), resultat.getInt("weight"),
+								resultat.getInt("length"), resultat.getString("picture")));
 			}			
 		}		
 		catch (SQLException e) {
@@ -37,14 +39,15 @@ public class BabyDAO {
 	}
 	
 	public static boolean addBaby(Baby baby){
-		String requeteRegister = "INSERT INTO baby (id,birthday,name,gender,idUser) VALUES (ID_BABY.nextval,(SELECT TO_DATE(?, 'DD-MM-YYYY') From DUAL),?,?,?)";
+		String requeteRegister = "INSERT INTO baby (id,birthday,name,gender,picture,idUser) VALUES (ID_BABY.nextval,(SELECT TO_DATE(?, 'DD-MM-YYYY') From DUAL),?,?,?,?)";
 		try {
 
 			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
 			requeteSt.setString(1,baby.getBirthday());
 			requeteSt.setString(2,baby.getName());
 			requeteSt.setString(3,baby.getGender());
-			requeteSt.setInt(4,baby.getId_user());
+			requeteSt.setString(4,baby.getPicture());
+			requeteSt.setInt(5,baby.getId_user());
 			requeteSt.executeUpdate();	
 		}
 		
@@ -66,7 +69,9 @@ public class BabyDAO {
 			ResultSet resultat = requete.executeQuery();
 
 			if (resultat.next()) {
-				baby = new Baby (resultat.getInt("id"), resultat.getInt("iduser"), df.format(resultat.getDate("birthday")), resultat.getString("name"), resultat.getString("gender"));
+				baby = new Baby (resultat.getInt("id"), resultat.getInt("iduser"), 
+						df.format(resultat.getDate("birthday")), resultat.getString("name"), 
+						resultat.getString("gender"), resultat.getString("picture"));
 			}			
 		}		
 		catch (SQLException e) {
@@ -85,7 +90,8 @@ public class BabyDAO {
 			ResultSet resultat = requete.executeQuery();
 
 			if (resultat.next()) {
-				baby = new Baby (resultat.getInt("id"), resultat.getInt("iduser"), df.format(resultat.getDate("birthday")), resultat.getString("name"), resultat.getString("gender"));
+				baby = new Baby (resultat.getInt("id"), resultat.getInt("iduser"), df.format(resultat.getDate("birthday")), 
+						resultat.getString("name"), resultat.getString("gender"), resultat.getString("picture"));
 			}			
 		}		
 		catch (SQLException e) {
@@ -93,4 +99,19 @@ public class BabyDAO {
 		}
 		return baby;	
 	}
+	
+	public static boolean removeBaby(int id){
+		String requeteRemove = "DELETE FROM baby WHERE id = ? ";
+		try {
+			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRemove);
+			
+			requeteSt.setInt(1, id);
+			requeteSt.executeUpdate();	
+		}		
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}	
 }

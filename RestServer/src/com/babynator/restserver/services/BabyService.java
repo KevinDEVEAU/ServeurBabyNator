@@ -15,6 +15,7 @@ import com.babynator.restserver.BabyNatorUser;
 import com.babynator.restserver.Data;
 import com.babynator.restserver.Baby;
 import com.babynator.restserver.db.BabyDAO;
+import com.babynator.restserver.db.EventDAO;
 
 @Path("/babies")
 public class BabyService {
@@ -53,6 +54,19 @@ public class BabyService {
     		return Response.status(Response.Status.CONFLICT).build();
     	else 
     		return Response.ok(BabyDAO.getLastInsertBaby(baby.getId_user()), MediaType.APPLICATION_JSON).build();
+    }
+    
+    @POST
+    @Path("/remove")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response removeBaby(int id) {
+    	
+    	boolean test = BabyDAO.removeBaby(id);
+    	System.out.println(test+"");
+    	if (!test)
+    		return Response.status(Response.Status.CONFLICT).build();
+    	else 
+    		return Response.ok(test, MediaType.APPLICATION_JSON).build();
     }
 }
 
