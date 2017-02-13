@@ -19,7 +19,7 @@ public class DataDAO {
 	public static boolean addData(Data data){
 		String requeteRegister = "INSERT INTO Data (weight,length,idbaby,currentdate) VALUES (?,?,?,(SELECT TO_DATE(?, 'DD-MM-YYYY') From DUAL))";
 		Date date = new Date();
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		System.out.println(df.format(date));
 		try {
 			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);

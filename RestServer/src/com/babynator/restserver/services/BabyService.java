@@ -59,10 +59,8 @@ public class BabyService {
     @POST
     @Path("/remove")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response removeBaby(int id) {
-    	
+    public Response removeBaby(int id) {    	
     	boolean test = BabyDAO.removeBaby(id);
-    	System.out.println(test+"");
     	if (!test)
     		return Response.status(Response.Status.CONFLICT).build();
     	else 
