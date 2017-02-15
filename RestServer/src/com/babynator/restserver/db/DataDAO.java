@@ -23,8 +23,8 @@ public class DataDAO {
 		System.out.println(df.format(date));
 		try {
 			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
-			requeteSt.setInt(1,data.getWeight());
-			requeteSt.setInt(2,data.getLength());
+			requeteSt.setDouble(1,data.getWeight());
+			requeteSt.setDouble(2,data.getLength());
 			requeteSt.setInt(3,data.getId_baby());
 			requeteSt.setString(4,df.format(date));
 			requeteSt.executeUpdate();	
@@ -44,8 +44,8 @@ public class DataDAO {
 		System.out.println(df.format(date));
 		try {
 			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
-			requeteSt.setInt(1,data.getWeight());
-			requeteSt.setInt(2,data.getLength());
+			requeteSt.setDouble(1,data.getWeight());
+			requeteSt.setDouble(2,data.getLength());
 			requeteSt.setInt(3,data.getId_baby());
 			requeteSt.setString(4,data.getCurrent_date());
 			requeteSt.executeUpdate();	
@@ -67,12 +67,12 @@ public class DataDAO {
 			ResultSet resultat = requeteSt.executeQuery();
 
 			while (resultat.next()) {
-				 datas.add(new Data(resultat.getInt("weight"), resultat.getInt("length") ,resultat.getInt("idbaby"),resultat.getString("data_date")));
+				 datas.add(new Data(resultat.getDouble("weight"), resultat.getDouble("length") ,resultat.getInt("idbaby"),resultat.getString("data_date")));
 			}	
 		}
 		
 		catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 		return datas;
 	}

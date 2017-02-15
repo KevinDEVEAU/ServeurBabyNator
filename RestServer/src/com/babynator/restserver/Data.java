@@ -2,8 +2,8 @@ package com.babynator.restserver;
 
 public class Data {
 
-	private int weight;
-	private int length;
+	private double weight;
+	private double length;
 	private int id_baby;
 	private String current_date;
 	
@@ -12,16 +12,16 @@ public class Data {
 		return "Data [weight=" + weight + ", length=" + length + ", id_baby=" + id_baby + ", current_date="
 				+ current_date + "]";
 	}
-	public int getWeight() {
+	public double getWeight() {
 		return weight;
 	}
-	public void setWeight(int weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	public int getLength() {
+	public double getLength() {
 		return length;
 	}
-	public void setLength(int length) {
+	public void setLength(double length) {
 		this.length = length;
 	}
 	public int getId_baby() {
@@ -36,7 +36,7 @@ public class Data {
 	public void setCurrent_date(String current_date) {
 		this.current_date = current_date;
 	}
-	public Data(int weight, int length, int id_baby, String current_date) {
+	public Data(double weight, double length, int id_baby, String current_date) {
 		super();
 		this.weight = weight;
 		this.length = length;
@@ -46,7 +46,4 @@ public class Data {
 	public Data() {
 		super();
 	}
-	
-	
-
 }

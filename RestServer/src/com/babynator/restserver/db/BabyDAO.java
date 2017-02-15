@@ -27,14 +27,13 @@ public class BabyDAO {
 			while (resultat.next()) {
 				babies.add(new Baby 
 						(resultat.getInt("id"), resultat.getInt("idUser"),df.format(resultat.getDate("birthday")), 
-								resultat.getString("name"), resultat.getString("gender"), resultat.getInt("weight"),
-								resultat.getInt("length"), resultat.getString("picture")));
+								resultat.getString("name"), resultat.getString("gender"), resultat.getDouble("weight"),
+								resultat.getDouble("length"), resultat.getString("picture")));
 			}			
 		}		
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(babies.toString() +"list");
 		return babies;	
 	}
 	

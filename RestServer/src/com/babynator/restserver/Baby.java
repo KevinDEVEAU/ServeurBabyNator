@@ -13,27 +13,27 @@ public class Baby {
     private String gender;
     private String picture;
     @JsonIgnore
-    private int weight;
+    private double weight;
     @JsonIgnore
-    private int length;   
+    private double length;   
     
        
-	public int getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 
 
-	public void setWeight(int weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 	}
 
 
-	public int getLength() {
+	public double getLength() {
 		return length;
 	}
 
 
-	public void setLength(int length) {
+	public void setLength(double length) {
 		this.length = length;
 	}
 
@@ -92,7 +92,7 @@ public class Baby {
 		this.gender = gender;
 	}
 
-	public Baby(int id, int id_user, String birthday, String name, String gender, int weight, int length, String picture) {
+	public Baby(int id, int id_user, String birthday, String name, String gender, double weight, double length, String picture) {
 		super();
 		this.id = id;
 		this.id_user = id_user;
