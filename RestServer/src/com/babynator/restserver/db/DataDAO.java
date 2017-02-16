@@ -20,7 +20,6 @@ public class DataDAO {
 		String requeteRegister = "INSERT INTO Data (weight,length,idbaby,currentdate) VALUES (?,?,?,(SELECT TO_DATE(?, 'DD-MM-YYYY') From DUAL))";
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		System.out.println(df.format(date));
 		try {
 			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
 			requeteSt.setDouble(1,data.getWeight());
@@ -41,7 +40,6 @@ public class DataDAO {
 		String requeteRegister = "INSERT INTO Data (weight,length,idbaby,currentdate) VALUES (?,?,?,(SELECT TO_DATE(?, 'DD-MM-YYYY') From DUAL))";
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
-		System.out.println(df.format(date));
 		try {
 			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
 			requeteSt.setDouble(1,data.getWeight());

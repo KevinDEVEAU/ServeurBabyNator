@@ -28,7 +28,6 @@ public class BabyService {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Baby getEvent( @PathParam("id") int id ) {
-    	System.out.println(BabyDAO.getBabyById(id).toString());
     	return BabyDAO.getBabyById(id);
     }
     
@@ -38,8 +37,7 @@ public class BabyService {
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Baby> postEvent(int user) {
     	ArrayList<Baby> list = BabyDAO.getAllByUser(user);
-    	System.out.println(list);
-        return list; 
+    	return list; 
     }
     
     //ajout d'un bébé
@@ -47,9 +45,7 @@ public class BabyService {
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addEvent(Baby baby) {
-    	System.out.println(baby.toString());
     	boolean testRegister = BabyDAO.addBaby(baby);
-    	System.out.println(baby);
     	if (!testRegister)
     		return Response.status(Response.Status.CONFLICT).build();
     	else 

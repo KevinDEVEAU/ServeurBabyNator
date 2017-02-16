@@ -39,7 +39,6 @@ public class DataService {
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addData(Data data) {
-    	System.out.println(data.toString());
     	boolean testAddData = DataDAO.addData(data);
     	if (!testAddData)
     		return Response.status(Response.Status.CONFLICT).build();
@@ -52,7 +51,6 @@ public class DataService {
     @Path("/addBirthday")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addDatabirthday(Data data) {
-    	System.out.println(data.toString());
     	boolean testAddData = DataDAO.addDataBirthday(data);
     	if (!testAddData)
     		return Response.status(Response.Status.CONFLICT).build();
@@ -64,9 +62,7 @@ public class DataService {
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Data> getDatas(int id_baby) {
-    	System.out.println(id_baby);
     	List<Data> list = DataDAO.getListData(id_baby);
-    	System.out.println(list);
         return list; 
     }
     

@@ -67,7 +67,6 @@ public class EventDAO {
 	}
 	
 	public static boolean setEvent(Event event){
-		System.out.println(event.toString());
 		String requeteRegister = "UPDATE event SET currentDate = to_date(?, 'yyyy-mm-dd hh24:mi:ss'), title = ?, description = ? WHERE id = ?";
 		try {
 			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);

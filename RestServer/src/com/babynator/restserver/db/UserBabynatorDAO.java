@@ -42,7 +42,6 @@ public class UserBabynatorDAO {
 			ResultSet resultat = requete.executeQuery();
 
 			if (resultat.next()) {
-				System.out.println(resultat.getString("email")+ resultat.getString("password"));	
 				userConnect = new BabyNatorUser (resultat.getInt("id"),resultat.getString("email"), resultat.getString("password"));
 			}			
 		}		
@@ -59,20 +58,14 @@ public class UserBabynatorDAO {
 			String passwordToHash = user.getPassword();
 	        String generatedPassword = null;
 	        
-            // Create MessageDigest instance for MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
-            //Add password bytes to digest
             md.update(passwordToHash.getBytes());
-            //Get the hash's bytes 
             byte[] bytes = md.digest();
-            //This bytes[] has bytes in decimal format;
-            //Convert it to hexadecimal format
             StringBuilder sb = new StringBuilder();
             for(int i=0; i< bytes.length ;i++)
             {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
-            //Get complete hashed password in hex format
             generatedPassword = sb.toString();
             
 			PreparedStatement requeteSt = DAOOracle.getInstance().getConnection().prepareStatement(requeteRegister);
@@ -85,7 +78,6 @@ public class UserBabynatorDAO {
 			e.printStackTrace();
 			return false;
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}

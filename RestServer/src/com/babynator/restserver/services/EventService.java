@@ -36,8 +36,7 @@ public class EventService {
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Event> postEvent(int id_user) {
     	ArrayList<Event> list = EventDAO.getAllByUser(id_user);
-    	System.out.println(list);
-        return list; 
+    	return list; 
     }
     
     //ajout d'un event
@@ -45,9 +44,7 @@ public class EventService {
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addEvent(Event event) {
-    	System.out.println(event.toString());
     	boolean test = EventDAO.addEvent(event);
-    	System.out.println(event);
     	if (!test)
     		return Response.status(Response.Status.CONFLICT).build();
     	else 
